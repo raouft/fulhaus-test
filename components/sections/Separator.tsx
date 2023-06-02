@@ -17,7 +17,7 @@ const item = {
   hidden: {
     opacity: 0,
     y: 20,
-    scale: 0.95,
+    scale: 0.98,
   },
   visible: {
     opacity: 1,
