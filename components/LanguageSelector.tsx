@@ -3,7 +3,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -11,7 +11,7 @@ export default function LanguageSelector() {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
-        <Menu.Button className='inline-flex w-full justify-center border border-2 border-black bg-white px-2 py-2 text-sm font-medium text-black'>
+        <Menu.Button className='inline-flex w-full justify-center border border-2 border-black px-2 py-2 text-sm font-medium text-black hover:bg-stone-200'>
           <div className='mr-2 flex h-5 w-5 items-center justify-center overflow-hidden rounded-full'>
             <Image
               src='us.svg'
