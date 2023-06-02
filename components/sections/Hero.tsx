@@ -1,11 +1,26 @@
 import Image from 'next/image'
-import laptopMockup from '../public/laptop_mockup.png'
+import laptopMockup from '../../public/laptop_mockup.png'
 import { ArrowUpTrayIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+
 export default function Hero() {
+  const targetRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['end end', 'end 200px'],
+  })
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0])
+  const translateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, 50, 100])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
   return (
-    <div className='mx-auto max-w-full bg-stone-100 px-4 text-gray-900 sm:px-6 lg:px-8'>
+    <div
+      ref={targetRef}
+      className='z-0 mx-auto max-w-full overflow-hidden bg-stone-100 px-4 pt-10 text-gray-900 sm:px-6 lg:px-8'
+    >
       <div className='mx-auto max-w-5xl'>
         <div className='mx-auto gap-10 py-16 sm:flex sm:py-20'>
           <h1 className='mb-5 w-full flex-auto text-5xl sm:text-7xl md:w-20'>
@@ -92,9 +107,12 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className='mx-auto max-w-5xl'>
+      <motion.div
+        className='mx-auto max-w-5xl'
+        style={{ opacity, y: translateY, scale }}
+      >
         <Image src={laptopMockup} alt='Laptop Mockup' />
-      </div>
+      </motion.div>
     </div>
   )
 }
